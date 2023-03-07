@@ -3,7 +3,6 @@ import { useFormik } from 'formik'
 import React from 'react'
 
 function Createstudent() {
-    let i = 0
     const formik = useFormik({
         initialValues: {
             sname: "",
