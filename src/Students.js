@@ -10,13 +10,21 @@ function Students() {
     }, [])
 
     const fetchdata = async () => {
-        const res = await axios.get("https://6406217d40597b65de4b2804.mockapi.io/students")
-        setStudents(res.data)
+        const res = localStorage.getItem('students')
+        const studentsArray = JSON.parse(res)
+        setStudents(studentsArray)
+        console.log(studentsArray)
     }
-    const deleteSTudent= async(student)=>{
+    const deleteSTudent= async(studentid)=>{
         let conf = window.confirm("Are you sure you want to delete the student?")
         if(conf){
-            await axios.delete(`https://6406217d40597b65de4b2804.mockapi.io/students/${student}`)
+            const students = JSON.parse(localStorage.getItem('students'))
+            const filteredstudents = students.filter((student)=>student.id !== studentid)
+            const updatedStudents = filteredstudents.map((student, index) => {
+                return { ...student, id: index+1 };
+              });
+            localStorage.setItem('students', JSON.stringify(updatedStudents))
+            setStudents(updatedStudents)
             alert("Student deleted")
             fetchdata()
         }

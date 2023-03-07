@@ -12,8 +12,9 @@ function Editteacher() {
   }, [])
 
   const fetchdata = async () => {
-    const res = await axios.get(`https://6406217d40597b65de4b2804.mockapi.io/teachers/${id}`)
-    setUser(res.data)
+    const res = JSON.parse(localStorage.getItem('teachers'))
+    const selectedTeacher = res.find((teacher) => teacher.id == id)
+    setUser(selectedTeacher)
   }
   const formik = useFormik({
     initialValues: {
@@ -35,10 +36,19 @@ function Editteacher() {
       return err;
     },
     onSubmit: async (values) => {
-      await axios.put(`https://6406217d40597b65de4b2804.mockapi.io/teachers/${id}`, values);
+      const teachers = JSON.parse(localStorage.getItem('teachers')) || [];
+      const updatedTeachers = teachers.map((teacher) => {
+        if (teacher.id == id) {
+          return { ...teacher, ...values }
+        } else {
+          return teacher;
+        }
+      });
+      localStorage.setItem('teachers', JSON.stringify(updatedTeachers));
+      alert("Teacher updated");
       formik.resetForm()
-      alert("Teacher updated")
     }
+    
   })
 
   useEffect(() => {
@@ -82,7 +92,7 @@ function Editteacher() {
                 }
               </div>
               <div>
-                <button className='btn btn-md btn-primary mt-2'>Submit</button>
+                <button className='btn btn-md btn-primary mt-2'>Update</button>
               </div>
             </form>
           </div>

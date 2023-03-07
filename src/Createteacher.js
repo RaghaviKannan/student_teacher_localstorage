@@ -23,12 +23,15 @@ function Createteacher() {
       }
       return err;
     },
-    onSubmit: async (values) => {
-      await axios.post("https://6406217d40597b65de4b2804.mockapi.io/teachers", values);
+    onSubmit: (values) => {
+      const teachers = JSON.parse(localStorage.getItem('teachers')) || [];
+      const newTeacher = {...values, id: teachers.length+1}
+      teachers.push(newTeacher)
+      localStorage.setItem('teachers',JSON.stringify(teachers))       
       formik.resetForm()
       alert("Teacher added")
-    }
-  })
+  }
+})
   return (
     <div>
       <main id="main" className="main">

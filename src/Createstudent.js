@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import React from 'react'
 
 function Createstudent() {
+    let i = 0
     const formik = useFormik({
         initialValues: {
             sname: "",
@@ -37,11 +38,14 @@ function Createstudent() {
             }
             return err;
         },
-        onSubmit: async(values) => {
-            await axios.post("https://6406217d40597b65de4b2804.mockapi.io/students",values);
+        onSubmit: (values) => {
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            const newStudent = {...values, id: students.length+1 }
+            students.push(newStudent)
+            localStorage.setItem('students',JSON.stringify(students))       
             formik.resetForm()
             alert("Student added")
-        }
+          }        
     })
     return (
         <div>

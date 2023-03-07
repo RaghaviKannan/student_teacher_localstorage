@@ -12,8 +12,9 @@ function Editstudent() {
     }, [])
 
     const fetchdata = async () => {
-        const res = await axios.get(`https://6406217d40597b65de4b2804.mockapi.io/students/${id}`)
-        setUser(res.data)
+        const res = JSON.parse(localStorage.getItem('students'))
+        const selectedstudent = res.find((student)=> student.id == id)
+        setUser(selectedstudent)
     }
     const formik = useFormik({
         initialValues: {
@@ -49,11 +50,20 @@ function Editstudent() {
             }
             return err;
         },
-        onSubmit: async(values) => {
-            await axios.put(`https://6406217d40597b65de4b2804.mockapi.io/students/${id}`,values);
+        onSubmit: async (values) => {
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            const updatedStudents = students.map((student) => {
+              if (student.id == id) {
+                return { ...student, ...values }
+              } else {
+                return student;
+              }
+            });
+            localStorage.setItem('students', JSON.stringify(updatedStudents));
+            alert("Student updated");
             formik.resetForm()
-            alert("Student updated")
-        }
+          }
+          
     })
 
     useEffect(() => {
