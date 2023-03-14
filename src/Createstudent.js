@@ -33,7 +33,7 @@ function Createstudent() {
                 err.scourse = "Please select your course"
             }
             if (values.sbatch === "") {
-                err.sbatch = "Please select your batch"
+                err.sbatch = "Please select the batch"
             }
             return err;
         },

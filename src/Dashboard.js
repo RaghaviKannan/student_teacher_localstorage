@@ -30,6 +30,13 @@ function Dashboard() {
                                             <th>Teacher Name</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>ex</th>
+                                            <td>a</td>
+                                            <td>b</td>
+                                        </tr>
+                                    </tbody>
                                     {students.map((s, index) => {
                                         return <tbody>
                                             <tr>
