@@ -37,7 +37,7 @@ function Editteacher() {
     },
     onSubmit: async (values) => {
       const teachers = JSON.parse(localStorage.getItem('teachers')) || [];
-      const updatedTeachers = teachers.map((teacher) => {
+      const updatedTeachers = teachers?.map((teacher) => {
         if (teacher.id == id) {
           return { ...teacher, ...values }
         } else {

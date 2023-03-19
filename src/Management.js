@@ -77,7 +77,7 @@ function Management() {
                         name="selectedstudent"
                       >
                         <option value="">--select--</option>;
-                        {students.map((s) => {
+                        {students?.map((s) => {
                           return <option value={s.sname} key={s.id}>{s.sname}</option>;
                         })}
                       </select>
@@ -98,7 +98,7 @@ function Management() {
                         name="selectedteacher"
                       >
                         <option value="">--select--</option>;
-                        {teachers.map((t) => {
+                        {teachers?.map((t) => {
                           return <option value={t.tname} key={t.id}>{t.tname}</option>;
                         })}
                       </select>

@@ -18,7 +18,7 @@ function Teachers() {
         if(conf){
             const teachers = JSON.parse(localStorage.getItem('teachers'))
             const filteredteachers = teachers.filter((teacher)=>teacher.id !== teacherid)
-            const updatedTeachers = filteredteachers.map((teacher, index) => {
+            const updatedTeachers = filteredteachers?.map((teacher, index) => {
                 return { ...teacher, id: index+1 };
               });
             localStorage.setItem('teachers', JSON.stringify(updatedTeachers))
@@ -52,7 +52,7 @@ function Teachers() {
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            {teachers.map((t,index) => {
+                            {teachers?.map((t,index) => {
                                 return <tbody>
                                         <tr>
                                             <th>{index+1}</th>

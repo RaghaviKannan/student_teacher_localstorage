@@ -52,7 +52,7 @@ function Editstudent() {
         },
         onSubmit: async (values) => {
             const students = JSON.parse(localStorage.getItem('students')) || [];
-            const updatedStudents = students.map((student) => {
+            const updatedStudents = students?.map((student) => {
               if (student.id == id) {
                 return { ...student, ...values }
               } else {

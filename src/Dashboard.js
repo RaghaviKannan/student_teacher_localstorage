@@ -30,7 +30,7 @@ function Dashboard() {
                                             <th>Teacher Name</th>
                                         </tr>
                                     </thead>
-                                    {students.map((s, index) => {
+                                    {students?.map((s, index) => {
                                         return <tbody>
                                             <tr>
                                                 <th>{index + 1}</th>
